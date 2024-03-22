@@ -96,18 +96,41 @@ public class Date_Duration_Calculator extends JFrame {
 		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Date Date_1 = dateChooser.getDate();
-				Date Date_2 = dateChooser_1.getDate();
-				long diff_milliseconds = Date_2.getTime() - Date_1.getTime();
 				
-				long diff_seconds = diff_milliseconds / 1000;
-				long diff_minutes = diff_seconds / 60;
-				long diff_hours = diff_minutes / 60;
-				long diff_days = diff_hours / 24;
-				System.out.println(diff_hours);
-				String infoMessage = "test";
-				String titleBar = "It's been too long";
-				JOptionPane.showMessageDialog(null, diff_days + " days\n" + diff_hours + " hours\n" + diff_minutes + " minutes\n" + diff_seconds + " seconds", titleBar, JOptionPane.INFORMATION_MESSAGE);
+				
+				
+				try {
+					Date Date_1 = dateChooser.getDate();
+					Date Date_2 = dateChooser_1.getDate();
+					long diff_milliseconds = Date_2.getTime() - Date_1.getTime();
+					
+					//no negative time
+					if(diff_milliseconds < 0) {
+						String message = "Your second date was before your first!";
+						JOptionPane.showMessageDialog(new JFrame(), message, "ERROR",
+						        JOptionPane.ERROR_MESSAGE);
+					}else {
+						long diff_seconds = diff_milliseconds / 1000;
+						long diff_minutes = diff_seconds / 60;
+						long diff_hours = diff_minutes / 60;
+						long diff_days = diff_hours / 24;
+						System.out.println(diff_hours);
+						String infoMessage = "test";
+						String titleBar = "It's been too long";
+						JOptionPane.showMessageDialog(null, diff_days + " days\n" + diff_hours + " hours\n" + diff_minutes + " minutes\n" + diff_seconds + " seconds", titleBar, JOptionPane.INFORMATION_MESSAGE);
+					}
+				}catch(NullPointerException npe) {
+					JOptionPane.showMessageDialog(new JFrame(), "You didn't enter a date!", "ERROR",
+					        JOptionPane.ERROR_MESSAGE);
+				}
+				
+				
+				
+				
+				
+				
+				
+				
 			}
 		});
 	}
